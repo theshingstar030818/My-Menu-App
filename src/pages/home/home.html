@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Search</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,7 +11,19 @@
   <ion-searchbar
     [(ngModel)]="searchInput"
     [showCancelButton]="shouldShowCancel"
+    [cancelButtonText]="cancelButtonText"
     (ionInput)="onInput($event)"
+    (ionClear)="onIonClear($event)"
     (ionCancel)="onCancel($event)">
   </ion-searchbar>
+  <ion-list *ngIf="searchResults">
+    <ion-item *ngFor="let r of searchResults?.restaurants">
+      <ion-thumbnail item-start>
+        <img [src]="r.restaurant.thumb || '../../assets/imgs/default-restaurant-thumb.png'">
+      </ion-thumbnail>
+      <h2>{{r.restaurant.name}}</h2>
+      <p text-wrap>{{r.restaurant.location.address}}</p>
+      <button ion-button clear item-end>View</button>
+    </ion-item>
+  </ion-list>
 </ion-content>

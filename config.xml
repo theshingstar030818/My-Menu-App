@@ -84,4 +84,5 @@
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate your current latitude and logitude" />
     </plugin>
+    <engine name="ios" spec="4.5.4" />
 </widget>

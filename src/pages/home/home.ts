@@ -19,6 +19,8 @@ export class HomePage {
 
   searchInput: string = '';
   shouldShowCancel: boolean = true;
+  cancelButtonText: string = 'Search';
+  searchResults;
 
   constructor(
     public navCtrl: NavController, 
@@ -29,21 +31,26 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    
+
   }
 
   onInput(event) {
-    console.log(this.searchInput);
-    this.yelpProvider.autocomplete(
-      this.searchInput, 
-      this.gpsProvider.position.coords.latitude, 
-      this.gpsProvider.position.coords.longitude).pipe().subscribe(data => {
-        console.log(data);
-      });
+
+  }
+
+  onIonClear($event) {
+    console.log(event);
+    event.stopPropagation();
   }
 
   onCancel(event) {
-
+    console.log(event);
+    console.log(this.searchInput);
+    this.yelpProvider.autocomplete(
+      this.searchInput).pipe().subscribe(data => {
+        this.searchResults = data;
+        console.log(data);
+      });
   }
 
 }

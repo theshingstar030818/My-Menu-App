@@ -18,38 +18,19 @@ export class YelpProvider {
     console.log('Hello YelpProvider Provider');
   }
 
-  autocomplete(text: string, latitude: number, longitude: number, locale?: string) {
+  autocomplete(text: string) {
     let params = new HttpParams({
       fromObject: {
-        text: text,
-        longitude: longitude.toString(),
-        latitude: latitude.toString(),
-        // locale: locale
+        q: text
       }
     });
 
-    // var headers = new HttpHeaders({});
-    // headers.append('Authorization', 'Bearer t2nGAqBYZMtCTOXWzGXnsPrEQ1Udj6nwmZcdWyov9UzCYcMfOF2zVZjJgfDAD-ulwReDUt-JMeOUYmFdO5kbogv2G981COSiYG-1julxzRxzcAyoGY7BkE4ZseA7W3Yx');
-    // headers.append('Content-Type', 'application/json');
-
-    
-    console.log(new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'Bearer t2nGAqBYZMtCTOXWzGXnsPrEQ1Udj6nwmZcdWyov9UzCYcMfOF2zVZjJgfDAD-ulwReDUt-JMeOUYmFdO5kbogv2G981COSiYG-1julxzRxzcAyoGY7BkE4ZseA7W3Yx'
-    }));
-
-    let header = new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'Bearer t2nGAqBYZMtCTOXWzGXnsPrEQ1Udj6nwmZcdWyov9UzCYcMfOF2zVZjJgfDAD-ulwReDUt-JMeOUYmFdO5kbogv2G981COSiYG-1julxzRxzcAyoGY7BkE4ZseA7W3Yx'
-    });
-
+    let header = new HttpHeaders({});
+    header = header.append('Content-Type','application/json');
+    header = header.append('user-key','fe9cf929d0377ad560ac411654477683');
     console.log(header);
 
-    let other_header = header.append('Content-Type','application/json');
-    other_header = header.append('Authorization','Bearer t2nGAqBYZMtCTOXWzGXnsPrEQ1Udj6nwmZcdWyov9UzCYcMfOF2zVZjJgfDAD-ulwReDUt-JMeOUYmFdO5kbogv2G981COSiYG-1julxzRxzcAyoGY7BkE4ZseA7W3Yx');
-    console.log(other_header.get('Authorization')); 
-
-    return this.http.get('https://api.yelp.com/v3/autocomplete', {headers:other_header});
+    return this.http.get('https://developers.zomato.com/api/v2.1/search', {headers:header, params:params});
   }
 
 }
